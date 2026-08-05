@@ -34,7 +34,7 @@ The account name sits in the top right of the Brevo header, next to a building i
 
 If not logged in, `app.brevo.com/automation/automations` redirects to a login screen. Ask the user to sign in; never enter credentials.
 
-`mcp__Brevo__accounts_get_account` gives the account behind the MCP connection. That is not necessarily the same account as the browser session — the MCP uses an API key, the browser uses a cookie. Compare them before you start looking up lists and templates, because a mismatch means every lookup silently describes a different account than the one you're clicking in.
+Brevo's own `accounts_get_account` verb gives the account behind the MCP connection (clients prefix MCP tool names differently — `mcp__Brevo__accounts_get_account` in Claude clients). That is not necessarily the same account as the browser session — the MCP uses an API key, the browser uses a cookie. Compare them before you start looking up lists and templates, because a mismatch means every lookup silently describes a different account than the one you're clicking in.
 
 ## Editor layout
 

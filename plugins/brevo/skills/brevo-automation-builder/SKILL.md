@@ -1,6 +1,7 @@
 ---
 name: brevo-automation-builder
 description: Builds a complete marketing automation in Brevo by clicking through the automation builder in Chrome, based on a briefing from the user. Use this skill whenever someone wants to build, set up, configure or finish a Brevo automation, workflow, flow or customer journey — a welcome flow, onboarding series, abandoned cart, re-engagement, birthday email, lead nurturing sequence, and so on, in Brevo (formerly Sendinblue). Also trigger when the user simply shares a briefing or description of an email flow and asks whether it can be "put into Brevo", or asks to modify, reorder or complete an existing Brevo automation. Requests often arrive in Dutch ("automation bouwen", "flow inrichten", "welkomstflow in Brevo") — treat those the same. Do not use for standalone Brevo email campaigns, templates or contact management that involve no automation.
+compatibility: Requires a browser-automation tool that drives the user's OWN, already-signed-in browser session (built against Claude in Chrome). A headless or fresh-profile browser will not work — this skill never handles Brevo credentials, so it depends on a session the human has already authenticated. Brevo exposes no automation API, so there is no non-browser route.
 ---
 
 # Build a Brevo automation from a briefing
@@ -23,11 +24,16 @@ One thing will fool you a few times: **the canvas re-renders slowly.** A step yo
 
 Before you build anything, establish where you'd be building it. Getting this wrong means a welcome flow landing in the wrong client's account, which is the kind of mistake that is expensive to explain afterwards.
 
-Load the browser tools in a single ToolSearch call:
+Make sure you can drive the user's browser before you start. You need to navigate, screenshot, click,
+type, and read a page's text — in the browser **the user is already signed in to**, because this skill
+never handles their Brevo credentials. Load whatever your client provides for that, in one go if it
+supports batching.
 
-```
-select:mcp__claude-in-chrome__tabs_context_mcp,mcp__claude-in-chrome__navigate,mcp__claude-in-chrome__computer,mcp__claude-in-chrome__browser_batch,mcp__claude-in-chrome__find,mcp__claude-in-chrome__get_page_text
-```
+> In Claude clients that is the Chrome extension, loaded with a single ToolSearch call:
+> `select:mcp__claude-in-chrome__tabs_context_mcp,mcp__claude-in-chrome__navigate,mcp__claude-in-chrome__computer,mcp__claude-in-chrome__browser_batch,mcp__claude-in-chrome__find,mcp__claude-in-chrome__get_page_text`
+
+A headless browser or a fresh profile cannot do this job: it starts signed out, and the answer to that
+is never to type someone's password. If all you have is a clean automated browser, say so and stop.
 
 Open `https://app.brevo.com/automation/automations` and take a screenshot. Three things can happen:
 
@@ -37,9 +43,9 @@ Open `https://app.brevo.com/automation/automations` and take a screenshot. Three
 
 **Logged into more than one account** — the chevron lists them. Don't switch accounts on your own initiative; ask.
 
-If the Brevo MCP tools are available, also call `mcp__Brevo__accounts_get_account`. Compare it against the account in the browser header. If they differ, say so and ask which one is authoritative — the MCP would then be reading lists and templates from a different account than the one you're clicking in, and every lookup you do would be quietly wrong.
+If the Brevo MCP tools are available, also call its `accounts_get_account` verb. Compare it against the account in the browser header. If they differ, say so and ask which one is authoritative — the MCP would then be reading lists and templates from a different account than the one you're clicking in, and every lookup you do would be quietly wrong.
 
-Then confirm with the user before touching anything, using AskUserQuestion (or plain text if that tool isn't available):
+Then confirm with the user before touching anything — through a structured question tool if your client has one (`AskUserQuestion` in Claude clients), otherwise plain text:
 
 > I'm about to build the automation in Brevo account **Plainpaper** (logged in as thierry@…). It'll be saved as a draft and left inactive. Shall I go ahead?
 
@@ -54,16 +60,16 @@ Read the briefing and check it against `references/briefing-checklist.md`. Four 
 3. **Content per email step** — an existing template (name or ID), an existing automation message, or something that still has to be created?
 4. **Which list or segment** wherever that applies.
 
-If something essential is missing, ask it in one go via AskUserQuestion rather than drip-feeding questions step by step. If only something small is missing (a subject line, a sender name), pick a sensible option and report it afterwards.
+If something essential is missing, ask for all of it in one go rather than drip-feeding questions step by step. If only something small is missing (a subject line, a sender name), pick a sensible option and report it afterwards.
 
 ### Look up account data through the MCP, not by clicking
 
-If the Brevo MCP tools are available, use them to look up lists, templates and senders. It's faster and more reliable than scrolling through dropdowns, and you need the exact names and IDs to click the right item later:
+If the Brevo MCP tools are available, use them to look up lists, templates and senders. It's faster and more reliable than scrolling through dropdowns, and you need the exact names and IDs to click the right item later. These are Brevo's own verb names — clients prefix them differently (`mcp__Brevo__lists_get_lists` in Claude clients), so match on the verb, not the prefix:
 
-- `mcp__Brevo__lists_get_lists` — list names and IDs
-- `mcp__Brevo__segments_get_segments` — segments
-- `mcp__Brevo__templates_get_smtp_templates` — saved templates with their ID (the builder shows those IDs too, as `#10`)
-- `mcp__Brevo__senders_get_senders` — valid sender addresses
+- `lists_get_lists` — list names and IDs
+- `segments_get_segments` — segments
+- `templates_get_smtp_templates` — saved templates with their ID (the builder shows those IDs too, as `#10`)
+- `senders_get_senders` — valid sender addresses
 
 Match the briefing's names against these. If a name differs (briefing says "Nieuwsbrief", the account has "Newsletter NL"), don't guess at the nearest match — put the options in front of the user.
 
@@ -181,6 +187,6 @@ still an inactive draft waiting for a human to switch it on.
 
 ## When things go wrong
 
-If a click misses the same element three times, stop hammering. `find` with a natural-language description often gives you a usable reference where coordinates fail; `get_page_text` shows what's actually on the page. If that doesn't help, report what you tried, what you saw and what you still need — with the automation in whatever state you left it.
+If a click misses the same element three times, stop hammering. If your tooling can locate an element from a natural-language description, that often gives you a usable reference where coordinates fail; reading the page's text content shows what is actually there. (In Claude clients those are `find` and `get_page_text`.) If that doesn't help, report what you tried, what you saw and what you still need — with the automation in whatever state you left it.
 
 If you hit a 404 on `automation.brevo.com`, use `app.brevo.com/automation/automations` instead. If the user turns out not to be logged in, ask them to log in themselves; never sign in with credentials.

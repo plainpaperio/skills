@@ -65,6 +65,31 @@ phrasings for exactly this reason.
 State the negative too, when there is an obvious near-miss: Brevo's ends with "Do not use for
 standalone Brevo email campaigns, templates or contact management that involve no automation."
 
+### Write it portable — it costs nothing
+
+[Agent Skills](https://agentskills.io) is an open standard, read by Claude Code, Codex, Cursor,
+Copilot, Gemini CLI and dozens more. A skill that stays inside the core spec — the frontmatter fields
+below, Markdown, and the `scripts/` `references/` `assets/` directories — works in all of them
+unmodified. Only agent-specific features trade portability for power, and publishing one version per
+agent is the failure mode the standard exists to prevent: you end up rebuilding the same skill twice
+and the copies drift within a week.
+
+**Naming a vendor's tool buys you nothing.** Claude finds its own browser tools whether or not the
+skill spells them out; hardcoding `mcp__claude-in-chrome__…` as *the instruction* just makes the line
+dead text for every other client. So:
+
+- **State the capability, then give the vendor call as a labelled example.** "You need to navigate,
+  screenshot, click, type and read page text" is true everywhere; the `ToolSearch` incantation goes
+  underneath as "in Claude clients, that is…".
+- **Declare genuine requirements in `compatibility`** (≤500 chars) rather than leaving them implicit.
+  That is the field's exact purpose — the spec's own example is `Designed for Claude Code (or similar
+  products)`. `brevo-automation-builder` uses it to say it needs the user's *signed-in* browser.
+- **When a skill does NOT need the user's own session, put the capability in `scripts/` instead.**
+  This is the strongest answer and it is what Anthropic's own `webapp-testing` skill does: it drives a
+  browser with zero tool names by bundling Playwright and telling the agent to run it, which turns
+  "which browser tool do you have?" into "can you run Python?". It does not fit the Brevo skill —
+  a bundled browser starts with a clean profile and no Brevo login — but reach for it first.
+
 ### Writing the body
 
 Read the existing `brevo-automation-builder/SKILL.md` before writing a new one. The conventions worth

@@ -10,15 +10,23 @@ are three steps into somebody's automation builder.
 
 ## Install
 
-In Claude Code:
+These are [Agent Skills](https://agentskills.io) — an open format read by Claude Code, Codex, Cursor,
+Copilot, Gemini CLI, VS Code and a few dozen other clients. The plugin marketplace below is the
+convenient path for Claude clients; it is not the only one.
+
+**Claude Code:**
 
 ```
 /plugin marketplace add thi3rrydereus/plainpaper-skills
 /plugin install brevo@plainpaper
 ```
 
-In the Claude desktop app: open the **Cowork** tab, then **Customize → Plugins**, add this repository
-as a marketplace, and install the plugin from there.
+**Claude desktop app:** open the **Cowork** tab, then **Customize → Plugins**, add this repository as
+a marketplace, and install the plugin from there.
+
+**Any other Agent-Skills client:** each skill folder under `plugins/*/skills/` is spec-compliant on
+its own. Copy the folder into whatever skills directory your client reads (`~/.codex/skills/`,
+`~/.config/gemini/skills/`, and so on) — no plugin machinery needed.
 
 Later, to pull in changes:
 
@@ -27,6 +35,19 @@ Later, to pull in changes:
 ```
 
 You only receive an update when the plugin's `version` field changes.
+
+## Requirements
+
+Per skill, but `brevo-automation-builder` needs a **browser-automation tool that drives your own,
+already-signed-in browser** — it was built against the Claude in Chrome extension, with permission for
+`app.brevo.com`. A headless or fresh-profile browser will not do: it starts signed out, and the skill
+deliberately never handles your Brevo credentials. Brevo exposes no automation API, so there is no
+non-browser route to automations at all.
+
+Optional but recommended: the Brevo MCP connector, so lists, segments, templates and senders can be
+looked up by name and ID instead of scrolled through in dropdowns.
+
+Each skill declares its own requirements in the `compatibility` field of its `SKILL.md`.
 
 ## What is in here
 
