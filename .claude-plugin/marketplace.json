@@ -1,11 +1,12 @@
 {
   "name": "plainpaper",
   "owner": {
-    "name": "Thierry de Reus",
-    "email": "thierrydereus@gmail.com"
+    "name": "Plainpaper",
+    "email": "hello@plainpaper.io",
+    "url": "https://plainpaper.io"
   },
   "metadata": {
-    "description": "Skills for running marketing through an AI agent — one plugin per platform Plainpaper knows about.",
+    "description": "Skills for running marketing through an AI agent \u2014 one plugin per platform Plainpaper knows about.",
     "version": "1.0.0"
   },
   "plugins": [
@@ -15,7 +16,8 @@
       "description": "Skills for Brevo (formerly Sendinblue). Includes brevo-automation-builder, which builds a complete marketing automation from a briefing by clicking through Brevo's automation builder in Chrome and hands it back as an inactive draft.",
       "version": "1.0.0",
       "author": {
-        "name": "Thierry de Reus"
+        "name": "Plainpaper",
+        "url": "https://plainpaper.io"
       },
       "category": "marketing",
       "keywords": [

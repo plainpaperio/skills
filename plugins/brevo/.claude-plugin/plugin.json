@@ -3,10 +3,10 @@
   "description": "Skills for Brevo (formerly Sendinblue). Includes brevo-automation-builder, which builds a complete marketing automation from a briefing by clicking through Brevo's automation builder in Chrome, confirms the account first, and hands the flow back as an inactive draft with a direct link.",
   "version": "1.0.0",
   "author": {
-    "name": "Thierry de Reus",
-    "email": "thierrydereus@gmail.com"
+    "name": "Plainpaper",
+    "url": "https://plainpaper.io"
   },
-  "homepage": "https://github.com/thi3rrydereus/plainpaper-skills",
+  "homepage": "https://github.com/plainpaperio/skills",
   "keywords": [
     "brevo",
     "sendinblue",
