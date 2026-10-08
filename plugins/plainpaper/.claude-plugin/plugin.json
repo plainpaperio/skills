@@ -1,0 +1,24 @@
+{
+  "name": "plainpaper",
+  "displayName": "Plainpaper",
+  "description": "Plan, write and approve marketing campaigns with Claude on a Plainpaper board: Black Friday, product launches, welcome emails, ads and more. Every email and ad waits for your approval, and Claude picks the campaign back up from the board in any new conversation.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Plainpaper",
+    "email": "hello@plainpaper.io",
+    "url": "https://plainpaper.io"
+  },
+  "homepage": "https://plainpaper.io",
+  "repository": "https://github.com/plainpaperio/skills",
+  "license": "MIT",
+  "keywords": [
+    "marketing",
+    "campaign-planning",
+    "black-friday",
+    "email-marketing",
+    "ads",
+    "approval",
+    "ecommerce",
+    "plainpaper"
+  ]
+}

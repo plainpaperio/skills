@@ -38,6 +38,7 @@ dozens of others. Nothing here is Claude-only.
 
 ```
 /plugin marketplace add plainpaperio/skills
+/plugin install plainpaper@plainpaper
 /plugin install brevo@plainpaper
 ```
 
@@ -55,6 +56,7 @@ plugin's `version` changes.
 
 | Plugin | Skill | What it does |
 |---|---|---|
+| `plainpaper` | `plainpaper-plan-campaign`, `plainpaper-black-friday`, `plainpaper-continue-board`, `plainpaper-ship-approved` | Plans, writes and ships campaigns on a [Plainpaper](https://plainpaper.io) board, and bundles the Plainpaper connector. Claude picks the playbook that fits, builds the board card by card for your approval, picks the campaign back up in any new conversation, and ships approved work through each platform's own connector. Needs a (free) Plainpaper account. |
 | `brevo` | `brevo-automation-builder` | Builds a marketing automation in Brevo from a written briefing, by driving the automation builder in your browser. Confirms which account it's in first, saves as an **inactive draft**, and hands back a direct link. |
 
 More platforms are coming. One plugin per platform, named after the platform.
@@ -106,7 +108,7 @@ Plainpaper never sends anything itself. Your agent reaches each platform through
 integration — which is exactly why these skills exist, and why they live in their own repository under
 an open licence rather than locked inside a product.
 
-**You do not need a Plainpaper account to use anything here.** Every skill works standalone.
+**You do not need a Plainpaper account for the platform plugins.** Every platform skill works standalone. Only the `plainpaper` plugin, which runs your campaigns on a Plainpaper board, needs an account (the free plan is enough).
 
 If you do use Plainpaper, the connection is that a board tells your agent which skills matter for the
 tools it has enabled — so an agent opening a campaign that contains an automation is told the Brevo
