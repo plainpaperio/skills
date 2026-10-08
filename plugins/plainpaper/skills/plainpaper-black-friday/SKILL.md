@@ -17,17 +17,21 @@ as the board's launch day (`anchor_date`).
 
 Call `plan_campaign(goal=...)` with the user's words. Then:
 
-- If it recommends `official/bfcm-backwards-plan`, use it: ask its `ask_first` questions and create
-  it with `anchor_date` set to Black Friday. Follow its pinned guidance; it is the full method.
-- Otherwise (the BFCM playbook is on paid plans), it recommends a general campaign board. Create
-  that one with `anchor_date` set to Black Friday and shape it into the sprint below.
+- If it recommends `official/bfcm-backwards-plan`, use it: its pinned guidance is the full method.
+- Otherwise (the BFCM playbook is on paid plans), it recommends a general campaign board, which you
+  shape into the sprint below.
 
-Share the board link as soon as it exists.
+Before creating anything, ask in one short message what you still need: the playbook's `ask_first`
+questions, or for the sprint: what they sell, last year's Black Friday in one line, the number that
+would make this one a success, and the deepest discount that still makes money. Skip what the user
+already told you. **Then stop and wait for their reply**, unless they said to go ahead without it.
+
+Create the board with `anchor_date` set to Black Friday and the answers as `intake`, and share the
+board link as soon as it exists.
 
 ## 2. The sprint (for the general board, or with little time left)
 
-Ask the user, in one message: what they sell, last year's Black Friday in one line, the number that
-would make this one a success, and the deepest discount that still makes money. Then build, as cards:
+With their answers in hand, build these as cards:
 
 1. **The goal and the floor.** One number to hit, and the margin floor below which a discount loses
    money. Every offer decision gets checked against this card.

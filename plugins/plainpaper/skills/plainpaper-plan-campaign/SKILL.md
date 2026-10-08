@@ -27,7 +27,11 @@ you build, and pass its `workspace_id`.
 
 - Say in one sentence which playbook you picked and why, in plain words. Don't list every option.
 - Ask the `ask_first` questions together, conversationally, and the launch date if
-  `needs_launch_date` is true. Partial answers are fine; a playbook falls back to its own wording.
+  `needs_launch_date` is true. Skip anything the user already told you. Partial answers are fine; a
+  playbook falls back to its own wording.
+- **Then stop and wait for their reply.** Create the board only after they answer, or after they
+  say to go ahead without answers. Their answers are written into the board's brief, which every
+  later conversation reads, so they are worth one round trip.
 - If an existing board in `active_boards` is clearly the same campaign, offer to continue there.
 - If `board_limit` shows no free slot, don't try to create a board. Offer to continue on an existing
   one, or ask them to archive one in Plainpaper.
