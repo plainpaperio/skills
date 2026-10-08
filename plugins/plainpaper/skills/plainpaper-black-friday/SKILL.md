@@ -26,8 +26,9 @@ questions, or for the sprint: what they sell, last year's Black Friday in one li
 would make this one a success, and the deepest discount that still makes money. Skip what the user
 already told you. **Then stop and wait for their reply**, unless they said to go ahead without it.
 
-Create the board with `anchor_date` set to Black Friday and the answers as `intake`, and share the
-board link as soon as it exists.
+Create the board with `anchor_date` set to Black Friday and the answers as `intake`. Share the
+board link as soon as it exists and call `show_board(board_id)` once, so the user watches the plan
+fill up inside the conversation.
 
 ## 2. The sprint (for the general board, or with little time left)
 

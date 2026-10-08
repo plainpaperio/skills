@@ -30,6 +30,9 @@ one they mean; if two could fit, ask with the names. Prefer active boards over a
 - What is approved but not yet live
 - The one decision that would unblock the most, with the board link
 
+Then call `show_board(board_id)`: in Claude the user can review and approve the waiting cards right
+there in the conversation.
+
 ## 4. Continue
 
 - Act on each comment: revise the card with `update_card` (pass the `expected_version` you read; on

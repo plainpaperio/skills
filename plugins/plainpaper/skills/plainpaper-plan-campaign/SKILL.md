@@ -40,7 +40,9 @@ you build, and pass its `workspace_id`.
 
 1. `create_board_from_template(template_id, name, anchor_date, intake)`, with `intake` keyed by each
    question's `key`. Use a name the user would recognise ("Winter boot launch").
-2. Share the board link straight away: "Your board is ready, you can watch it fill up here: <url>".
+2. Share the board link straight away ("Your board is ready, you can watch it fill up here: <url>")
+   and call `show_board(board_id)` once. In Claude it puts the live board right in the
+   conversation, where it updates itself as you write; don't call it again for that.
 3. If the board has `use_guidelines` on, call `get_guidelines` before you write and follow it. If the
    workspace has no guidelines yet and the user has a website, offer to draft them first; don't insist.
 4. `get_board` to see the seeded phases and cards, then work through them in order. Replace each
