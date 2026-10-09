@@ -14,7 +14,7 @@
       "name": "plainpaper",
       "source": "./plugins/plainpaper",
       "description": "Plan, write and approve marketing campaigns with Claude on a Plainpaper board: Black Friday, product launches, welcome emails, ads and more. Bundles the Plainpaper connector and four skills.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "Plainpaper",
         "url": "https://plainpaper.io"
